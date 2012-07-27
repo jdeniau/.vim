@@ -1,0 +1,24 @@
+snippet class Class with namespace
+	<?php
+
+	namespace ${1:`substitute(substitute(expand("%:h"), '\v^\w+\/(\u)', '\1', ''), '\/', '\\\', 'g')`};
+
+	class ${2:`Filename('', 'myClass')`}
+	{
+		${3}
+	}
+
+snippet array
+	$${1:arrayName} = array();${2}
+
+snippet ud
+	Utils::display(${1:variable});${2}
+
+snippet cl
+	console.log(${1:variable});${2}
+
+snippet get
+	${1}->get{$2}();${3}
+
+snippet set
+	${1}->set{$2}(${3});${4}
