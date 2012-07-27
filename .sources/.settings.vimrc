@@ -212,6 +212,9 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 " Tag list
 nnoremap <silent> <F8> :TlistToggle<CR>
 
+imap <buffer> <F5> <C-O>:call PhpInsertUse()<CR>
+map <buffer> <F5> :call PhpInsertUse()<CR>
+
 
 if $COLORTERM == 'gnome-terminal'
 	set t_Co=256
