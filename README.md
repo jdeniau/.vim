@@ -8,7 +8,7 @@ You just have to put this in your **~/.vimrc**
 :source ~/.vim/.sources/.settings.vimrc
 ```
 
-I use [vim-script](https://github.com/vim-scripts/taglist.vim.git) taglist, so I have to generate my project taglist using this command : 
+I use vim-script [taglist](https://github.com/vim-scripts/taglist.vim.git), so I have to generate my project taglist using this command : 
 ```sh
 #!/bin/bash
 cd ~/path-to-my-projects-home/
