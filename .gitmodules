@@ -1,24 +1,24 @@
 [submodule "vim-fugitive"]
-	path = vim-fugitive
+	path = bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "phpdoc.vim"]
-	path = phpdoc.vim
+	path = bundle/phpdoc.vim
 	url = https://github.com/vexxor/phpdoc.vim.git
 [submodule "taglist.vim"]
-	path = taglist.vim
+	path = bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "vim-php-namespace"]
-	path = vim-php-namespace
+	path = bundle/vim-php-namespace
 	url = https://github.com/arnaud-lb/vim-php-namespace.git
 [submodule "vim-snipmate"]
-	path = vim-snipmate
+	path = bundle/vim-snipmate
 	url = git://github.com/garbas/vim-snipmate.git
 [submodule "tlib_vim"]
-	path = tlib_vim
+	path = bundle/tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
 [submodule "vim-addon-mw-utils"]
-	path = vim-addon-mw-utils
+	path = bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "snipmate-snippets"]
-	path = snipmate-snippets
+[submodule "bundle/snipmate-snippets"]
+	path = bundle/snipmate-snippets
 	url = https://github.com/chrisyue/snipmate-snippets.git
