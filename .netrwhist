@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/julien/sshfs/bender.sitioweb.fr/armycreator/src/Sitioweb/Bundle/ArmyCreatorBundle'
-let g:netrw_dirhist_2='/home/julien/sshfs/bender.sitioweb.fr/armycreator/src/Sitioweb/Bundle/ArmyCreatorBundle/Form'
-let g:netrw_dirhist_3='/home/julien/sshfs/dev.m6web.fr/m6/udpp/ws'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/julien/sshfs/bender.sitioweb.fr/armycreator/vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Form'
+let g:netrw_dirhist_2='/home/julien/sshfs/bender.sitioweb.fr/armycreator/vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Form/DataTransformer'
+let g:netrw_dirhist_3='/home/julien/sshfs/bender.sitioweb.fr/armycreator/vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Form'
+let g:netrw_dirhist_4='/home/julien/sshfs/bender.sitioweb.fr/armycreator/vendor/symfony/symfony/src/Symfony/Bridge/Doctrine/Form/ChoiceList'
+let g:netrw_dirhist_5='/home/julien/sshfs/bender.sitioweb.fr/armycreator/src/Sitioweb/Bundle/ArmyCreatorBundle/Resources/translations'

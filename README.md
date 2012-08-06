@@ -23,7 +23,7 @@ exec ctags-exuberant -f ~/.vim/tags \
 --PHP-kinds=+cfiv \
 --regex-PHP='/abstract class ([^ ]*)/\1/c/' \
 --regex-PHP='/interface ([^ ]*)/\1/c/' \
---regex-PHP='/(public |static |abstract |protected |private )+(final\s+)?function ([^ (]*)/\2/f/'
+--regex-PHP='/(public |static |abstract |protected |private )+(final\s+)?function ([^ (]*)/\3/f/'
 --extra=+f
 --langdef=twig
 --langmap=twig:.html.twig.xml.yml
