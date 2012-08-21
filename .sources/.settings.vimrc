@@ -28,6 +28,7 @@ au BufRead,BufNewFile *.twig setfiletype htmldjango
 :set wildmenu
 :set guioptions-=T 		" RETIRE LA BARRE D'OUTILS
 :set guioptions-=m 		" RETIRE LA BARRE DE MENU
+:set guioptions-=e 		" Tabs vi style (non-gtk)
 
 " OPTIONS SPECIFIQUES AU PHP
 :let php_mysql_query=1
@@ -63,7 +64,7 @@ set dictionary+=~/.vim/dictionary/PHP.dict
 :set directory=~/.vim/.backups
 
 
-:set showtabline=4
+:set showtabline=2
 
 set hls
 
@@ -216,8 +217,8 @@ imap <buffer> <F5> <C-O>:call PhpInsertUse()<CR>
 map <buffer> <F5> :call PhpInsertUse()<CR>
 
 
-if $COLORTERM == 'gnome-terminal'
-	set t_Co=256
-endif
+" if $COLORTERM == 'gnome-terminal'
+set t_Co=256
+" endif
 :source ~/.vim/.sources/.abbrevations.vimrc
 
