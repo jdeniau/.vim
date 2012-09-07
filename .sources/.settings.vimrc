@@ -6,6 +6,7 @@ au BufNewFile,BufRead *.tplperso set filetype=smarty
 au BufRead,BufNewFile *.twig setfiletype htmldjango
 
 " TAILLE DE LA TABULATION 
+:set expandtab
 :set ts=4
 :set shiftwidth=4
 :set textwidth=0
