@@ -28,6 +28,10 @@
 	:cab ga tabe ~/sshfs/dev.m6web.fr/galaxy/Apps/
 	:cab aga tabe ~/sshfs/dev.m6web.fr/api/galaxy/apps/
 
+    " cp (current project)
+	:cab cpa tabe ~/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/template/
+	:cab cpg tabe ~/sshfs/dev.m6web.fr/galaxy/Apps/SdC/
+
 
 " Définition des :map
 " --------------------------------------------------------------------

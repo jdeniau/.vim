@@ -1,3 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/julien/sshfs/dev.m6web.fr/usine_sf/app/config'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/julien/sshfs/dev.m6web.fr/api/include/templates/Breadcrumb'
+let g:netrw_dirhist_2='/home/julien/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/template/Admin'
+let g:netrw_dirhist_3='/home/julien/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/template/Admin/Home'
+let g:netrw_dirhist_4='/home/julien/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/template/Admin/Home/Program'
+let g:netrw_dirhist_5='/home/julien/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/css'
+let g:netrw_dirhist_6='/home/julien/sshfs/dev.m6web.fr/api/galaxy/apps/SdC/css/Admin'
