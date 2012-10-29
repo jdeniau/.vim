@@ -193,8 +193,8 @@ vnoremap <F6> :call PhpDocRange()<CR>
 
 "positionnement de la fenetre en full screen a droite
 :winpos 0 0
-:set lines=106
-:set columns=148
+":set lines=106
+":set columns=148
 
 " define a highlight colour group for bookmarks
 let g:showmarks_enable = 0
