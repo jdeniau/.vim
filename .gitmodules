@@ -19,6 +19,9 @@
 [submodule "vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "bundle/snipmate-snippets"]
+[submodule "snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = https://github.com/chrisyue/snipmate-snippets.git
+[submodule "undotree"]
+	path = bundle/undotree
+	url = https://github.com/mbbill/undotree.git

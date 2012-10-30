@@ -64,6 +64,11 @@ set dictionary+=~/.vim/dictionary/PHP.dict
 :set nowritebackup
 :set directory=~/.vim/.backups
 
+" persistant undo
+if has("persistent_undo")
+    :set undodir=~/.vim/.backups
+    :set undofile
+endif
 
 :set showtabline=2
 
@@ -210,6 +215,9 @@ highlight ShowMarksHLu gui=bold guibg=grey30
 highlight ShowMarksHLo gui=bold guibg=grey30
 " For multiple marks on the same line.
 highlight ShowMarksHLm gui=bold guibg=grey30
+
+" undotree
+nnoremap <silent> <F7> :UndotreeToggle<CR>
 
 " Tag list
 nnoremap <silent> <F8> :TlistToggle<CR>
