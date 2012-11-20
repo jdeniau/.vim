@@ -22,6 +22,6 @@
 [submodule "snipmate-snippets"]
 	path = bundle/snipmate-snippets
 	url = https://github.com/chrisyue/snipmate-snippets.git
-[submodule "undotree"]
+[submodule "bundle/undotree"]
 	path = bundle/undotree
 	url = https://github.com/mbbill/undotree.git

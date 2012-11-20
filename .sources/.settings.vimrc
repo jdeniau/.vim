@@ -196,6 +196,7 @@ map <C-]> <C-w><C-]>
 
 
 "php Doc
+let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@gmail.com>"
 inoremap <F6> <ESC>:call PhpDocSingle()<CR>i
 nnoremap <F6> :call PhpDocSingle()<CR>
 vnoremap <F6> :call PhpDocRange()<CR> 
