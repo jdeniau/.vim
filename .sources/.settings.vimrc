@@ -74,16 +74,14 @@ endif
 
 set hls
 
+call pathogen#infect()
 
 " phpDocumentator
 let g:pdv_cfg_Version = ""
-let g:pdv_cfg_Author = "Julien Deniau <jdeniau.externe@m6.fr>"
+let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
 " let g:pdv_cfg_Author = 'Julien Deniau <julien@sitioweb.fr>'
 let g:pdv_cfg_Copyright = ""
 let g:pdv_cfg_License = ""
-
-
-call pathogen#infect()
 
 " TRES IMPORTANT : le theme de couleurs.... :p
 ": colo nicolas
