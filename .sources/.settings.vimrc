@@ -166,6 +166,8 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 " touches relou
 :nnoremap Q :q
 :nnoremap q: :q
+:nnoremap W :w
+:nnoremap w: :w
 
 
 "TAGS PHP du projet

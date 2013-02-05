@@ -7,7 +7,7 @@
 	:ab _script_ <script type="text/javascript"><CR><CR></script><up><tab>
 	:ab _scriptsrc_ <script type="text/javascript" src=""></script><left><left><left><left><left><left><left><left><left><left><left>
 	:ab _sforeach_ {foreach from= item= }<CR><tab><CR><BS>{/foreach}<up><up><right><right><right><right>
-	:ab author @author Julien DENIAU <jdeniau.externe@m6.fr>
+	:ab author @author Julien DENIAU <julien.deniau@mapado.com>
 	:ab ud Utils::display();<left><left>
 	:ab kud \Krof\Utils\Utils::display();<left><left>
 	:ab cl console.log();<left><left>
