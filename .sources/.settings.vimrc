@@ -1,4 +1,4 @@
-" Détection de syntax
+" DÃ©tection de syntax
 :syntax enable 
 
 au BufNewFile,BufRead *.less set filetype=less
@@ -11,7 +11,7 @@ au BufRead,BufNewFile *.twig setfiletype htmldjango
 :set shiftwidth=4
 :set textwidth=0
 
-" DÉSACTIVE LE BIP
+" DÃ‰SACTIVE LE BIP
 :set vb t_vb=
 
 "IGNORER LA CASSE POUR LES RECHERCHES
@@ -53,7 +53,7 @@ set dictionary+=~/.vim/dictionary/PHP.dict
 
 " CHAR ENCODING
 " :set fileencoding=ISO-8859-1
-:set fileencoding=latin1
+:set fileencoding=utf-8
 
 " FONT UTILISEE
 :set gfn=Bitstream\ Vera\ Sans\ Mono\ 8
@@ -74,12 +74,15 @@ endif
 
 set hls
 
+let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
+
 call pathogen#infect()
+source ~/.vim/bundle/atoum/syntax/atoum.vim
+source ~/.vim/bundle/atoum/ftplugin/php/atoum.vim
 
 " phpDocumentator
 let g:pdv_cfg_Version = ""
 let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
-" let g:pdv_cfg_Author = 'Julien Deniau <julien@sitioweb.fr>'
 let g:pdv_cfg_Copyright = ""
 let g:pdv_cfg_License = ""
 
@@ -88,44 +91,75 @@ let g:pdv_cfg_License = ""
 :colo lucius
 
 " Fonction permettant de switcher rapidement entre le linewrap ou non
-function ToggleWrap()
-	if &wrap
-		set nowrap
-	else
-		set wrap
-	endif
-endfunction
+func! ToggleWrap()
+    if &wrap
+        set nowrap
+    else
+        set wrap
+    endif
+endfunc
 
 " on 'bind' la fonction sur la commande ,w
 nmap <silent> ,w <Esc>:call ToggleWrap()<CR>
 
-"recherche incrémentale
+"recherche incrÃ©mentale
 set incsearch
 
-function ToggleHLSearch()
-	if &hls
-		set nohls
-		exe "echo 'Highlight OFF'"
-	else
-		set hls
-		exe "echo 'Highlight ON'"
-	endif
-endfunction
+func! ToggleHLSearch()
+    if &hls
+        set nohls
+        exe "echo 'Highlight OFF'"
+    else
+        set hls
+        exe "echo 'Highlight ON'"
+    endif
+endfunc
 
 nmap <silent> ,n <Esc>:call ToggleHLSearch()<CR>
 
+func! ShiftTab(direction)
+     let tab_number = tabpagenr() 
+     if a:direction == 0
+         if tab_number == 1
+             exe 'tabm' . tabpagenr('$')
+         else
+             exe 'tabm' . (tab_number - 2)
+         endif
+     else
+         if tab_number == tabpagenr('$')
+             exe 'tabm ' . 0
+         else
+             exe 'tabm ' . tab_number
+         endif
+     endif
+     return ''
+endfunc
+
+" inoremap <silent> <C-S-h>  <C-r>=ShiftTab(0)<CR>
+" inoremap <silent> <C-S-l>  <C-r>=ShiftTab(1)<CR>
+
+:nnoremap <silent> <A-h>  :call ShiftTab(0)<CR>
+:nnoremap <silent> <A-l> :call ShiftTab(1)<CR>
+
+:nnoremap <C-l> gt
+:nnoremap <C-h> gT
+
+
+:imap <C-h> <Left>
+:imap <C-l> <Right>
+:imap <M-h> <Esc>
 
 
 
 " RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
-function Taborcomplete()
-	let col = col('.')-1
-	if !col || getline('.')[col-1] !~ '\k'
-		return "\<tab>"
-	else
-		return "\<C-N>"
-	endif
-endfunction
+func! Taborcomplete()
+    let col = col('.')-1
+    if !col || getline('.')[col-1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<C-N>"
+    endif
+endfunc
 
 " bind sur tab de la fonction.
 inoremap <Tab> <C-R>=Taborcomplete()<CR>
@@ -133,7 +167,7 @@ inoremap <Tab> <C-R>=Taborcomplete()<CR>
 
 
 
-"pour eviter les tab incrementés lors des copiers collers
+"pour eviter les tab incrementÃ©s lors des copiers collers
 " :set paste
 :set laststatus=2
 
@@ -196,7 +230,6 @@ map <C-]> <C-w><C-]>
 
 
 "php Doc
-let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@gmail.com>"
 inoremap <F6> <ESC>:call PhpDocSingle()<CR>i
 nnoremap <F6> :call PhpDocSingle()<CR>
 vnoremap <F6> :call PhpDocRange()<CR> 
