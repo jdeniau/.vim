@@ -1,9 +1,12 @@
+call pathogen#infect()
+
 " Détection de syntax
 :syntax enable 
 
 au BufNewFile,BufRead *.less set filetype=less
 au BufNewFile,BufRead *.tplperso set filetype=smarty
 au BufRead,BufNewFile *.twig setfiletype htmldjango
+au BufRead,BufNewFile *.json setfiletype javascript
 
 " TAILLE DE LA TABULATION 
 :set expandtab
@@ -76,7 +79,6 @@ set hls
 
 let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
 
-call pathogen#infect()
 source ~/.vim/bundle/atoum/syntax/atoum.vim
 source ~/.vim/bundle/atoum/ftplugin/php/atoum.vim
 
