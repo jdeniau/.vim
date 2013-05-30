@@ -151,9 +151,6 @@ endfunc
 :imap <C-l> <Right>
 :imap <M-h> <Esc>
 
-:cmap wro %!sudo tee > /dev/null %
-
-
 
 " RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
 func! Taborcomplete()
@@ -207,6 +204,7 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 :cnoremap W :w
 :cnoremap w: :w
 :cnoremap WQ :wq
+:cmap wro %!sudo tee > /dev/null %
 
 
 "TAGS PHP du projet
