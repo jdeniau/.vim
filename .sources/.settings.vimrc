@@ -151,6 +151,8 @@ endfunc
 :imap <C-l> <Right>
 :imap <M-h> <Esc>
 
+:cmap wro %!sudo tee > /dev/null %
+
 
 
 " RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
@@ -200,10 +202,11 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 :inoremap <Home> <Esc>^i
 
 " touches relou
-:nnoremap Q :q
-:nnoremap q: :q
-:nnoremap W :w
-:nnoremap w: :w
+:cnoremap Q :q
+:cnoremap q: :q
+:cnoremap W :w
+:cnoremap w: :w
+:cnoremap WQ :wq
 
 
 "TAGS PHP du projet
