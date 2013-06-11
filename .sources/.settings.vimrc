@@ -152,6 +152,7 @@ endfunc
 :imap <M-h> <Esc>
 
 
+
 " RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
 func! Taborcomplete()
     let col = col('.')-1
@@ -202,9 +203,11 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 :cnoremap Q :q
 :cnoremap q: :q
 :cnoremap W :w
-:cnoremap w: :w
 :cnoremap WQ :wq
+:cnoremap w: :w
 :cmap wro %!sudo tee > /dev/null %
+:map <S-Insert> <MiddleMouse>
+:map! <S-Insert> <MiddleMouse>
 
 
 "TAGS PHP du projet
