@@ -12,16 +12,13 @@
 	url = https://github.com/arnaud-lb/vim-php-namespace.git
 [submodule "vim-snipmate"]
 	path = bundle/vim-snipmate
-	url = git://github.com/garbas/vim-snipmate.git
+	url = https://github.com/garbas/vim-snipmate.git
 [submodule "tlib_vim"]
 	path = bundle/tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
 [submodule "vim-addon-mw-utils"]
 	path = bundle/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "snipmate-snippets"]
-	path = bundle/snipmate-snippets
-	url = https://github.com/chrisyue/snipmate-snippets.git
 [submodule "bundle/undotree"]
 	path = bundle/undotree
 	url = https://github.com/mbbill/undotree.git
