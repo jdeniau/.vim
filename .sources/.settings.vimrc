@@ -200,11 +200,6 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 :inoremap <Home> <Esc>^i
 
 " touches relou
-:cnoremap Q :q
-:cnoremap q: :q
-:cnoremap W :w
-:cnoremap WQ :wq
-:cnoremap w: :w
 :cmap wro %!sudo tee > /dev/null %
 :map <S-Insert> <MiddleMouse>
 :map! <S-Insert> <MiddleMouse>
