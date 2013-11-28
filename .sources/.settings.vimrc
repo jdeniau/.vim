@@ -1,54 +1,290 @@
-call pathogen#infect()
+" COMPATIBILITE AVEC VI DE BASE 
+:set nocompatible
+filetype off
 
-" Détection de syntax
-:syntax enable 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-au BufNewFile,BufRead *.less set filetype=less
-au BufNewFile,BufRead *.tplperso set filetype=smarty
-au BufRead,BufNewFile *.twig setfiletype htmldjango
-au BufRead,BufNewFile *.json setfiletype javascript
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My bundles
+Bundle 'tpope/vim-fugitive'
+
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'tomtom/tlib_vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'mbbill/undotree'
+Bundle 'scrooloose/syntastic'
+
+" Snippets
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+
+" PHP
+Bundle 'spf13/PIV'
+"Bundle 'vexxor/phpdoc.vim'
+Bundle 'arnaud-lb/vim-php-namespace'
+
+" HTML5
+Bundle 'elzr/vim-json'
+Bundle 'groenewege/vim-less'
+Bundle 'pangloss/vim-javascript'
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'beyondwords/vim-twig'
+
+
+
+
+
+if executable('ack-grep')
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+    Bundle 'mileszs/ack.vim'
+elseif executable('ack')
+    Bundle 'mileszs/ack.vim'
+elseif executable('ag')
+    Bundle 'mileszs/ack.vim'
+    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+endif
+Bundle 'spf13/vim-autoclose'
+Bundle 'mhinz/vim-signify'
+Bundle 'spf13/vim-colors'
+
+"php Doc
+inoremap <F6> <ESC>:call PhpDoc()<CR>i
+nnoremap <F6> :call PhpDoc()<CR>
+vnoremap <F6> :call PhpDoc()<CR>
+
+
+
+
+
+
+
+
+
+
+"call pathogen#infect()
+
+" General
+filetype plugin indent on
+syntax on
+
+if has ('x') && has ('gui') " On Linux use + register for copy-paste
+    set clipboard=unnamedplus
+elseif has ('gui')          " On mac and Windows, use * register for copy-paste
+    set clipboard=unnamed
+endif
+
+set history=1000 " 100 history (default is 20)
+set spell " spell checking on
+
+" Instead of reverting the cursor to the last position in the buffer, we
+" set it to the first line when editing a git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+
+" Backup
+set backup
+set writebackup
+set backupdir=~/.vim/.backups
+set directory=~/.vim/.backups
+if has('persistent_undo')
+    set undofile                " So is persistent undo ...
+    set undolevels=1000         " Maximum number of changes that can be undone
+    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+    set undodir=~/.vim/.backups
+endif
+
+
+" UI
+" if $COLORTERM == 'gnome-terminal'
+set t_Co=256
+" endif
+colorscheme lucius
+"LuciusBlack
+
+set showmode
+set cursorline
+hi CursorLine guibg=#111
+
+if has("statusline")
+	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]%f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
+	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
+	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+	"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+endif
+
+
+set backspace=indent,eol,start  " Backspace for dummies"
+set linespace=0                 " No extra spaces between rows
+set nu                          " Line numbers on
+set showmatch                   " Show matching brackets/parenthesis
+set incsearch                   " Find as you type search
+set hlsearch                    " Highlight search terms
+set winminheight=0              " Windows can be 0 line high
+set ignorecase                  " Case insensitive search
+set smartcase                   " Case sensitive when uc present
+set wildmenu                    " Show list instead of just completing
+set guioptions-=T 		        " no toolbar
+set guioptions-=m 		        " no menubar
+set guioptions-=e 		        " Tabs vi style (non-gtk)
+set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=3                 " Minimum lines to keep above and below cursor
+set foldenable                  " Auto fold code
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
+
+set foldcolumn=1
+
+
+" Formatting {
+    " set nowrap                      " Do not wrap long lines
+    set autoindent                  " Indent at the same level of the previous line
+    set shiftwidth=4                " Use indents of 4 spaces
+    set expandtab                   " Tabs are spaces, not tabs
+    set tabstop=4                   " An indentation every four columns
+    set softtabstop=4               " Let backspace delete indent
+    set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+    set splitright                  " Puts new vsplit windows to the right of the current
+    set splitbelow                  " Puts new split windows to the bottom of the current
+    "set matchpairs+=<:>             " Match, to be used with %
+    set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
+    "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
+    " Remove trailing whitespaces and ^M chars
+    " To disable the stripping of whitespace, add the following to your
+    " .vimrc.before.local file:
+    "   let g:spf13_keep_trailing_whitespace = 1
+    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
+    autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+    " preceding line best in a plugin but here for now.
+
+    autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+
+    " Workaround vim-commentary for Haskell
+    autocmd FileType haskell setlocal commentstring=--\ %s
+    " Workaround broken colour highlighting in Haskell
+    autocmd FileType haskell setlocal nospell
+" }
+
+" Stupid shift key fixes
+if has("user_commands")
+    command! -bang -nargs=* -complete=file E e<bang> <args>
+    command! -bang -nargs=* -complete=file W w<bang> <args>
+    command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+    command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+    command! -bang Wa wa<bang>
+    command! -bang WA wa<bang>
+    command! -bang Q q<bang>
+    command! -bang QA qa<bang>
+    command! -bang Qa qa<bang>
+endif
+
+cmap Tabe tabe
+
+" Yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$"
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Sudo save
+:cmap wro %!sudo tee > /dev/null %
+
+" Plugins {
+    " PIV {
+        let g:DisableAutoPHPFolding = 1
+        let g:PIVAutoClose = 0
+    " }
+    " SnipMate {
+        " Setting the author val
+        " If forking, please overwrite in your .vimrc.local file
+        let g:snips_author = 'Julien Deniau <julien.deniau@mapado.com>'
+    " }"
+
+    " Undotree {
+        nnoremap <silent> <F7> :UndotreeToggle<CR>
+
+        " If undotree is opened, it is likely one wants to interact with it.
+        let g:undotree_SetFocusWhenToggle = 1
+    " }
+
+    " Tag list {
+        nnoremap <silent> <F8> :TlistToggle<CR>
+    " }
+" }
+
+" Strip whitespace {
+    function! StripTrailingWhitespace()
+        " Preparation: save last search, and cursor position.
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        " do the business:
+        %s/\s\+$//e
+        " clean up: restore previous search history, and cursor position
+        let @/=_s
+    call cursor(l, c)
+        endfunction
+" }
+
+" GUI
+:set gfn=Bitstream\ Vera\ Sans\ Mono\ 8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"au BufNewFile,BufRead *.less set filetype=less
+"au BufRead,BufNewFile *.twig setfiletype htmldjango
+"au BufRead,BufNewFile *.json setfiletype javascript
 
 " TAILLE DE LA TABULATION 
-:set expandtab
-:set ts=4
-:set shiftwidth=4
 :set textwidth=0
 
 " DÉSACTIVE LE BIP
 :set vb t_vb=
 
-"IGNORER LA CASSE POUR LES RECHERCHES
-:set ignorecase
-
-" NUMEROTATION DES LIGNES
-:set number
-
-" COMPATIBILITE AVEC VI DE BASE 
-:set nocompatible
-
 " RETOUR A LA LIGNE AUTOMATIQUE 
 " :set nowrap
 
-:set wildmenu
-:set guioptions-=T 		" RETIRE LA BARRE D'OUTILS
-:set guioptions-=m 		" RETIRE LA BARRE DE MENU
-:set guioptions-=e 		" Tabs vi style (non-gtk)
-
 " OPTIONS SPECIFIQUES AU PHP
-:let php_mysql_query=1
-:let php_folding=1
+":let php_mysql_query=1
+":let php_folding=1
 
 " APPLICATION APPELEE PAR LA COMMANDE :MAKE
-:set makeprg=php\ -l\ %
-:set errorformat=%m\ in\ %f\ on\ line\ %l
+":set makeprg=php\ -l\ %
+":set errorformat=%m\ in\ %f\ on\ line\ %l
 
-" GERE L'INDENTATION DES LIGNES EN FONCTION DE LA PRECEDENTE
-:set autoindent
-:set smartindent
-
-" FAIRE SAUTER UN CERTAIN NB DE LIGNE QUAND ON ARRIVE SUR UN BOUT D'ECRAN 
-:set scrolljump=5
-:set scrolloff=3
+" Indentation
+":set smartindent
 
 " DICTIONNARY PHP
 set complete-=k complete+=k
@@ -56,56 +292,26 @@ set dictionary+=~/.vim/dictionary/PHP.dict
 
 " CHAR ENCODING
 " :set fileencoding=ISO-8859-1
-:set fileencoding=utf-8
+":set fileencoding=utf-8
 
 " FONT UTILISEE
-:set gfn=Bitstream\ Vera\ Sans\ Mono\ 8
 
-" IMPORTANT (CTE FOIS, C'EST VRAI :P) : DEFINI LE REPERTOIRE DE SWAP DE VIM
-" A LAISSER DANS UN REP LOCAL POUR EVITER DE "POLLUER" MASTER AVEC DES .SWP QUAND ON EST EN SSHFS
-:set nobackup
-:set nowritebackup
-:set directory=~/.vim/.backups
 
-" persistant undo
-if has("persistent_undo")
-    :set undodir=~/.vim/.backups
-    :set undofile
-endif
 
-:set showtabline=2
+"set showtabline=2
 
-set hls
+"let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
+"
+"source ~/.vim/bundle/atoum/syntax/atoum.vim
+"source ~/.vim/bundle/atoum/ftplugin/php/atoum.vim
+"
+"" phpDocumentator
+"let g:pdv_cfg_Version = ""
+"let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
+"let g:pdv_cfg_Copyright = ""
+"let g:pdv_cfg_License = ""
 
-let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
 
-source ~/.vim/bundle/atoum/syntax/atoum.vim
-source ~/.vim/bundle/atoum/ftplugin/php/atoum.vim
-
-" phpDocumentator
-let g:pdv_cfg_Version = ""
-let g:pdv_cfg_Author = "Julien Deniau <julien.deniau@mapado.com>"
-let g:pdv_cfg_Copyright = ""
-let g:pdv_cfg_License = ""
-
-" TRES IMPORTANT : le theme de couleurs.... :p
-": colo nicolas
-:colo lucius
-
-" Fonction permettant de switcher rapidement entre le linewrap ou non
-func! ToggleWrap()
-    if &wrap
-        set nowrap
-    else
-        set wrap
-    endif
-endfunc
-
-" on 'bind' la fonction sur la commande ,w
-nmap <silent> ,w <Esc>:call ToggleWrap()<CR>
-
-"recherche incrémentale
-set incsearch
 
 func! ToggleHLSearch()
     if &hls
@@ -154,17 +360,17 @@ endfunc
 
 
 " RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
-func! Taborcomplete()
-    let col = col('.')-1
-    if !col || getline('.')[col-1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<C-N>"
-    endif
-endfunc
+"func! Taborcomplete()
+"    let col = col('.')-1
+"    if !col || getline('.')[col-1] !~ '\k'
+"        return "\<tab>"
+"    else
+"        return "\<C-N>"
+"    endif
+"endfunc
 
 " bind sur tab de la fonction.
-inoremap <Tab> <C-R>=Taborcomplete()<CR>
+" inoremap <Tab> <C-R>=Taborcomplete()<CR>
 
 
 
@@ -173,22 +379,12 @@ inoremap <Tab> <C-R>=Taborcomplete()<CR>
 " :set paste
 :set laststatus=2
 
-if has("statusline")
-	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
-	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
-	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-	"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-endif
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
 
 
-set cursorline
-hi CursorLine guibg=#111
 
-set scrolloff=2
-set foldcolumn=1
 
 "Raccourci
 vmap ,f :<C-U>!firefox "http://fr.php.net/<cword>" >& /dev/null<CR><CR>
@@ -200,7 +396,6 @@ vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope
 :inoremap <Home> <Esc>^i
 
 " touches relou
-:cmap wro %!sudo tee > /dev/null %
 :map <S-Insert> <MiddleMouse>
 :map! <S-Insert> <MiddleMouse>
 
@@ -230,11 +425,6 @@ map <C-LeftMouse> <LeftMouse> :tab tj <C-R>=expand("<cword>")<CR><CR>
 map <C-]> <C-w><C-]>
 
 
-"php Doc
-inoremap <F6> <ESC>:call PhpDocSingle()<CR>i
-nnoremap <F6> :call PhpDocSingle()<CR>
-vnoremap <F6> :call PhpDocRange()<CR> 
-
 "positionnement de la fenetre en full screen a droite
 :winpos 0 0
 ":set lines=106
@@ -255,18 +445,11 @@ highlight ShowMarksHLo gui=bold guibg=grey30
 " For multiple marks on the same line.
 highlight ShowMarksHLm gui=bold guibg=grey30
 
-" undotree
-nnoremap <silent> <F7> :UndotreeToggle<CR>
-
-" Tag list
-nnoremap <silent> <F8> :TlistToggle<CR>
-
-imap <buffer> <F5> <C-O>:call PhpInsertUse()<CR>
-map <buffer> <F5> :call PhpInsertUse()<CR>
+""imap <buffer> <F5> <C-O>:call PhpInsertUse()<CR>
+""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 
-" if $COLORTERM == 'gnome-terminal'
-set t_Co=256
-" endif
 :source ~/.vim/.sources/.abbrevations.vimrc
+
+
 
