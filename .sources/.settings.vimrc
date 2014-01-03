@@ -79,7 +79,7 @@ elseif has ('gui')          " On mac and Windows, use * register for copy-paste
 endif
 
 set history=1000 " 100 history (default is 20)
-set spell " spell checking on
+set nospell " spell checking off
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
@@ -192,8 +192,8 @@ cmap Tabe tabe
 nnoremap Y y$"
 
 " Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
+" vnoremap < <gv
+" vnoremap > >gv
 
 " Sudo save
 :cmap wro %!sudo tee > /dev/null %
@@ -218,6 +218,10 @@ vnoremap > >gv
 
     " Tag list {
         nnoremap <silent> <F8> :TlistToggle<CR>
+    " }
+
+    " Json {
+        let g:vim_json_syntax_conceal = 0
     " }
 " }
 
@@ -325,8 +329,22 @@ endfunc
 
 nmap <silent> ,n <Esc>:call ToggleHLSearch()<CR>
 
+func! ToggleLeftColumns()
+    if &number
+        set nonumber
+        set foldcolumn=0
+        exe "echo 'Left columns OFF'"
+    else
+        set number
+        set foldcolumn=1
+        exe "echo 'Left columns ON'"
+    endif
+endfunc
+
+nmap <silent> ,f <Esc>:call ToggleLeftColumns()<CR>
+
 func! ShiftTab(direction)
-     let tab_number = tabpagenr() 
+     let tab_number = tabpagenr()
      if a:direction == 0
          if tab_number == 1
              exe 'tabm' . tabpagenr('$')
