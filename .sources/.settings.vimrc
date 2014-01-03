@@ -48,7 +48,7 @@ elseif executable('ag')
     Bundle 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 endif
-Bundle 'spf13/vim-autoclose'
+"Bundle 'spf13/vim-autoclose'
 Bundle 'mhinz/vim-signify'
 Bundle 'spf13/vim-colors'
 
@@ -202,6 +202,7 @@ nnoremap Y y$"
     " PIV {
         let g:DisableAutoPHPFolding = 1
         let g:PIVAutoClose = 0
+
     " }
     " SnipMate {
         " Setting the author val
