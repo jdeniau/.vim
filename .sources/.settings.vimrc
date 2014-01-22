@@ -131,7 +131,8 @@ set wildmenu                    " Show list instead of just completing
 set guioptions-=T 		        " no toolbar
 set guioptions-=m 		        " no menubar
 set guioptions-=e 		        " Tabs vi style (non-gtk)
-set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+"set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+set wildmode=full               " Command <Tab> completion, list matches, then longest common part, then all.
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
@@ -152,7 +153,7 @@ set foldcolumn=1
     set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
     set splitright                  " Puts new vsplit windows to the right of the current
     set splitbelow                  " Puts new split windows to the bottom of the current
-    "set matchpairs+=<:>             " Match, to be used with %
+    set matchpairs+=<:>             " Match, to be used with %
     set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
     "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
     " Remove trailing whitespaces and ^M chars
