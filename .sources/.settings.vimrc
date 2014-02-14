@@ -57,10 +57,8 @@ inoremap <F6> <ESC>:call PhpDoc()<CR>i
 nnoremap <F6> :call PhpDoc()<CR>
 vnoremap <F6> :call PhpDoc()<CR>
 
-
-
-
-
+map <F1> <Esc>
+imap <F1> <Esc>
 
 
 
@@ -126,6 +124,7 @@ set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
 set winminheight=0              " Windows can be 0 line high
 set ignorecase                  " Case insensitive search
+set wildignorecase              " Case insensitive command line
 set smartcase                   " Case sensitive when uc present
 set wildmenu                    " Show list instead of just completing
 set guioptions-=T 		        " no toolbar
