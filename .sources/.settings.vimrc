@@ -3,11 +3,11 @@
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
 if exists("*vundle#rc")
+    call vundle#rc()
     Bundle 'gmarik/vundle'
 
     " My bundles
