@@ -7,34 +7,39 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+if exists("*vundle#rc")
+    Bundle 'gmarik/vundle'
 
-" My bundles
-Bundle 'tpope/vim-fugitive'
+    " My bundles
+    Bundle 'tpope/vim-fugitive'
 
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'tomtom/tlib_vim'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'mbbill/undotree'
-Bundle 'scrooloose/syntastic'
+    Bundle 'vim-scripts/taglist.vim'
+    Bundle 'tomtom/tlib_vim'
+    Bundle 'MarcWeber/vim-addon-mw-utils'
+    Bundle 'mbbill/undotree'
+    Bundle 'scrooloose/syntastic'
 
-" Snippets
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+    " Snippets
+    Bundle 'garbas/vim-snipmate'
+    Bundle 'honza/vim-snippets'
 
-" PHP
-Bundle 'spf13/PIV'
-"Bundle 'vexxor/phpdoc.vim'
-Bundle 'arnaud-lb/vim-php-namespace'
+    " PHP
+    Bundle 'spf13/PIV'
+    "Bundle 'vexxor/phpdoc.vim'
+    Bundle 'arnaud-lb/vim-php-namespace'
 
-" HTML5
-Bundle 'elzr/vim-json'
-Bundle 'groenewege/vim-less'
-Bundle 'pangloss/vim-javascript'
-Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'beyondwords/vim-twig'
+    " HTML5
+    Bundle 'elzr/vim-json'
+    Bundle 'groenewege/vim-less'
+    Bundle 'pangloss/vim-javascript'
+    Bundle 'amirh/HTML-AutoCloseTag'
+    Bundle 'hail2u/vim-css3-syntax'
+    Bundle 'beyondwords/vim-twig'
 
+    "Bundle 'spf13/vim-autoclose'
+    Bundle 'mhinz/vim-signify'
+    Bundle 'spf13/vim-colors'
+endif
 
 
 
@@ -48,9 +53,6 @@ elseif executable('ag')
     Bundle 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 endif
-"Bundle 'spf13/vim-autoclose'
-Bundle 'mhinz/vim-signify'
-Bundle 'spf13/vim-colors'
 
 "php Doc
 inoremap <F6> <ESC>:call PhpDoc()<CR>i
@@ -108,7 +110,7 @@ set showmode
 set cursorline
 hi CursorLine guibg=#111
 
-if has("statusline")
+if exists("*fugitive#head")
 	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]%f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
 	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
 	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
