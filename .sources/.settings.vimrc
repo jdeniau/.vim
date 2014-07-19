@@ -1,58 +1,58 @@
-" COMPATIBILITE AVEC VI DE BASE 
 :set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 
 " let Vundle manage Vundle
 " required! 
-if exists("*vundle#rc")
-    call vundle#rc()
-    Bundle 'gmarik/vundle'
+"if exists("*vundle#begin")
+    call vundle#begin()
+    Plugin 'gmarik/Vundle.vim'
 
     " My bundles
-    Bundle 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-fugitive'
 
-    Bundle 'vim-scripts/taglist.vim'
-    Bundle 'tomtom/tlib_vim'
-    Bundle 'MarcWeber/vim-addon-mw-utils'
-    Bundle 'mbbill/undotree'
-    Bundle 'scrooloose/syntastic'
+    Plugin 'vim-scripts/taglist.vim'
+    Plugin 'tomtom/tlib_vim'
+    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'mbbill/undotree'
+    Plugin 'scrooloose/syntastic'
 
     " Snippets
-    Bundle 'garbas/vim-snipmate'
-    Bundle 'honza/vim-snippets'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
 
     " PHP
-    Bundle 'spf13/PIV'
-    "Bundle 'vexxor/phpdoc.vim'
-    Bundle 'arnaud-lb/vim-php-namespace'
+    Plugin 'spf13/PIV'
+    "Plugin 'vexxor/phpdoc.vim'
+    Plugin 'arnaud-lb/vim-php-namespace'
 
     " HTML5
-    Bundle 'elzr/vim-json'
-    Bundle 'groenewege/vim-less'
-    Bundle 'pangloss/vim-javascript'
-    Bundle 'amirh/HTML-AutoCloseTag'
-    Bundle 'hail2u/vim-css3-syntax'
-    Bundle 'beyondwords/vim-twig'
+    Plugin 'elzr/vim-json'
+    Plugin 'groenewege/vim-less'
+    Plugin 'pangloss/vim-javascript'
+    Plugin 'amirh/HTML-AutoCloseTag'
+    Plugin 'hail2u/vim-css3-syntax'
+    Plugin 'beyondwords/vim-twig'
 
-    "Bundle 'spf13/vim-autoclose'
-    Bundle 'mhinz/vim-signify'
-    Bundle 'spf13/vim-colors'
-endif
+    "Plugin 'spf13/vim-autoclose'
+    Plugin 'mhinz/vim-signify'
+    Plugin 'spf13/vim-colors'
 
+    if executable('ack-grep')
+        let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+        Plugin 'mileszs/ack.vim'
+    elseif executable('ack')
+        Plugin 'mileszs/ack.vim'
+    elseif executable('ag')
+        Plugin 'mileszs/ack.vim'
+        let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+    endif
 
-
-
-if executable('ack-grep')
-    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-    Bundle 'mileszs/ack.vim'
-elseif executable('ack')
-    Bundle 'mileszs/ack.vim'
-elseif executable('ag')
-    Bundle 'mileszs/ack.vim'
-    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-endif
+    call vundle#end()
+"else
+"    echo 'begin exists no'
+"endif
 
 "php Doc
 inoremap <F6> <ESC>:call PhpDoc()<CR>i

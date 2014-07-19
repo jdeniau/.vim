@@ -1,3 +1,3 @@
 echo ':source ~/.vim/.sources/.settings.vimrc' > ~/.vimrc
-git submodule update bundle/vundle
-vim +BundleInstall +qall
+git submodule update bundle/Vundle.vim
+vim +PluginInstall +qall
