@@ -104,8 +104,9 @@ endif
 " if $COLORTERM == 'gnome-terminal'
 set t_Co=256
 " endif
-colorscheme lucius
-"LuciusBlack
+colorscheme jdeniau
+" colorscheme lucius
+" LuciusBlack
 
 set showmode
 set cursorline
