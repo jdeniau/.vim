@@ -26,6 +26,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'spf13/PIV'
     "Plugin 'vexxor/phpdoc.vim'
     Plugin 'arnaud-lb/vim-php-namespace'
+    Plugin 'vim-coffee-script'
+    Plugin 'joonty/vdebug'
 
     " HTML5
     Plugin 'elzr/vim-json'
@@ -48,7 +50,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
         Plugin 'mileszs/ack.vim'
         let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     endif
-
     call vundle#end()
 "else
 "    echo 'begin exists no'
@@ -110,8 +111,8 @@ set showmode
 set cursorline
 hi CursorLine guibg=#111
 
-if exists("*fugitive#head")
-	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]%f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
+if has("statusline")
+	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
 	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
 	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
 	"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
