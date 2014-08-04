@@ -471,6 +471,11 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""imap <buffer> <F5> <C-O>:call PhpInsertUse()<CR>
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
+" Syntastic checkers
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_jscs_args = "--preset=jquery"
+let g:syntastic_aggregate_errors = 1
+
 
 :source ~/.vim/.sources/.abbrevations.vimrc
 
