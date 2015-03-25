@@ -476,8 +476,8 @@ let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:syntastic_javascript_jscs_args = "--preset=jquery"
 let g:syntastic_aggregate_errors = 1
 
+let g:syntastic_php_phpcs_args = "--standard=PSR2"
+
 
 :source ~/.vim/.sources/.abbrevations.vimrc
-
-
 
