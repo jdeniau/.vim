@@ -19,7 +19,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'scrooloose/syntastic'
 
     " Snippets
-    Plugin 'garbas/vim-snipmate'
+    Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
 
     " PHP
@@ -38,8 +38,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'beyondwords/vim-twig'
 
     "Plugin 'spf13/vim-autoclose'
-    Plugin 'mhinz/vim-signify'
+    Plugin 'airblade/vim-gitgutter'
     Plugin 'spf13/vim-colors'
+
+    Plugin 'shawncplus/phpcomplete.vim'
+    Plugin 'stephpy/vim-php-cs-fixer'
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -63,6 +66,8 @@ vnoremap <F6> :call PhpDoc()<CR>
 map <F1> <Esc>
 imap <F1> <Esc>
 
+
+let mapleader=","
 
 
 
@@ -480,4 +485,3 @@ let g:syntastic_php_phpcs_args = "--standard=PSR2"
 
 
 :source ~/.vim/.sources/.abbrevations.vimrc
-
