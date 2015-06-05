@@ -180,6 +180,9 @@ set foldcolumn=1
     autocmd FileType haskell setlocal commentstring=--\ %s
     " Workaround broken colour highlighting in Haskell
     autocmd FileType haskell setlocal nospell
+
+    " Javascript airbnb convention
+    autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
 " }
 
 " Stupid shift key fixes
@@ -343,10 +346,12 @@ func! ToggleLeftColumns()
     if &number
         set nonumber
         set foldcolumn=0
+        GitGutterDisable
         exe "echo 'Left columns OFF'"
     else
         set number
         set foldcolumn=1
+        GitGutterEnable
         exe "echo 'Left columns ON'"
     endif
 endfunc
@@ -478,7 +483,6 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 
 " Syntastic checkers
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-let g:syntastic_javascript_jscs_args = "--preset=jquery"
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
