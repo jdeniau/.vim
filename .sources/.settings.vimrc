@@ -36,6 +36,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'amirh/HTML-AutoCloseTag'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
+    Plugin 'digitaltoad/vim-jade'
 
     "Plugin 'spf13/vim-autoclose'
     Plugin 'airblade/vim-gitgutter'
