@@ -32,7 +32,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
     " HTML5
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
-    Plugin 'digitaltoad/vim-jade'
     Plugin 'pangloss/vim-javascript'
     Plugin 'amirh/HTML-AutoCloseTag'
     Plugin 'hail2u/vim-css3-syntax'
