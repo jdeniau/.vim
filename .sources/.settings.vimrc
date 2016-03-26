@@ -482,7 +482,7 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 " Syntastic checkers
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = ['jscs']
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
