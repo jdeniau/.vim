@@ -5,3 +5,11 @@ endsnippet
 snippet ldd "Ladybug Dump Die" b
 ldd($${1:var});
 endsnippet
+
+snippet atoum "atoum bootstrap" b
+$this
+    ->given($this->newTestedInstance)
+    ->then
+        ->${1}
+;
+endsnippet
