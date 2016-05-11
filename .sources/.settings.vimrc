@@ -483,6 +483,7 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 " Syntastic checkers
+let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_aggregate_errors = 1
 
