@@ -33,7 +33,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
     Plugin 'pangloss/vim-javascript'
-    Plugin 'amirh/HTML-AutoCloseTag'
+    " Plugin 'amirh/HTML-AutoCloseTag'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
@@ -183,6 +183,7 @@ set foldcolumn=1
     autocmd FileType haskell setlocal nospell
 
     " Javascript airbnb convention
+    autocmd BufRead,BufEnter .babelrc,.eslintrc set filetype=javascript
     autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
 " }
 
@@ -483,6 +484,8 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 " Syntastic checkers
+let g:syntastic_php_checkers = ['php7.0', 'phpcs', 'phpmd']
+let g:syntastic_php_phpmd_exec = './vendor/phpmd/phpmd/src/bin/phpmd'
 let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_aggregate_errors = 1
