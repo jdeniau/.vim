@@ -33,6 +33,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
     Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
     " Plugin 'amirh/HTML-AutoCloseTag'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
@@ -185,6 +186,9 @@ set foldcolumn=1
     " Javascript airbnb convention
     autocmd BufRead,BufEnter .babelrc,.eslintrc set filetype=javascript
     autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
+
+    " jsx file not required to do JSX
+    let g:jsx_ext_required = 0
 " }
 
 " Stupid shift key fixes
