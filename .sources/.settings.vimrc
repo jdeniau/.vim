@@ -22,6 +22,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
 
+    " Diff
+    Plugin 'will133/vim-dirdiff'
+
     " PHP
     Plugin 'spf13/PIV'
     "Plugin 'vexxor/phpdoc.vim'
@@ -44,6 +47,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
     Plugin 'shawncplus/phpcomplete.vim'
     Plugin 'stephpy/vim-php-cs-fixer'
+
+    Plugin 'kien/ctrlp.vim'
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -429,7 +434,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 vmap ,f :<C-U>!firefox "http://fr.php.net/<cword>" >& /dev/null<CR><CR>
 vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope=quickref" >& /dev/null<CR><CR>
 
-
 "fonctionnement de la touche Home
 :noremap <Home> ^
 :inoremap <Home> <Esc>^i
@@ -490,6 +494,7 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 " Syntastic checkers
 let g:syntastic_php_checkers = ['php7.0', 'phpcs', 'phpmd']
 let g:syntastic_php_phpmd_exec = './vendor/phpmd/phpmd/src/bin/phpmd'
+let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode,controversial'
 let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_aggregate_errors = 1
