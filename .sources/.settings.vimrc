@@ -34,7 +34,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'groenewege/vim-less'
     Plugin 'pangloss/vim-javascript'
     Plugin 'mxw/vim-jsx'
-    " Plugin 'amirh/HTML-AutoCloseTag'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
@@ -92,6 +91,7 @@ set nospell " spell checking off
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+au BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 
 " Backup
@@ -117,7 +117,7 @@ colorscheme jdeniau
 
 set showmode
 set cursorline
-hi CursorLine guibg=#111
+" hi CursorLine guibg=#111
 
 if has("statusline")
 	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
