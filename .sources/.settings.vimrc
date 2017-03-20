@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " required! 
 "if exists("*vundle#begin")
     call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'
+    Plugin 'VundleVim/Vundle.vim'
 
     " My bundles
     Plugin 'tpope/vim-fugitive'
