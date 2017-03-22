@@ -36,7 +36,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
     Plugin 'pangloss/vim-javascript'
-    Plugin 'mxw/vim-jsx'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
@@ -49,6 +48,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'stephpy/vim-php-cs-fixer'
 
     Plugin 'kien/ctrlp.vim'
+
+    " status line
+     Plugin 'itchyny/lightline.vim'
+
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -76,10 +79,6 @@ imap <F1> <Esc>
 let mapleader=","
 
 
-
-
-"call pathogen#infect()
-
 " General
 filetype plugin indent on
 syntax on
@@ -90,13 +89,12 @@ elseif has ('gui')          " On mac and Windows, use * register for copy-paste
     set clipboard=unnamed
 endif
 
-set history=1000 " 100 history (default is 20)
+set history=10000 " history (default is 20)
 set nospell " spell checking off
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-au BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 
 " Backup
@@ -116,20 +114,24 @@ endif
 " if $COLORTERM == 'gnome-terminal'
 set t_Co=256
 " endif
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 colorscheme jdeniau
 " colorscheme lucius
 " LuciusBlack
 
 set showmode
 set cursorline
-" hi CursorLine guibg=#111
+hi CursorLine guibg=#111111
 
-if has("statusline")
-	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
-	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
-	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-	"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-endif
+" if has("statusline")
+" 	set statusline=%<%#StatusLineGit#%{fugitive#head()}%#StatusLine#\ [%{getcwd()}]\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
+" 	" set statusline=%<%#StatusLineGit#%{fugitive#statusline(\"[%b]\")}%#StatusLine#\ %f\ %h%m%r%=\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %l,%c\ %P
+" 	" set statusline=%<%f\ %h%m%r%=%#StatusLineGit#%{fugitive#statusline(\"[%status%]\")}%#StatusLine#\ %{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+" 	"set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+" endif
 
 
 set backspace=indent,eol,start  " Backspace for dummies"
@@ -247,6 +249,125 @@ nnoremap Y y$"
     " Json {
         let g:vim_json_syntax_conceal = 0
     " }
+    " lightline {
+      let g:lightline = {
+      \   'colorscheme': 'powerline',
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+      \     'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   },
+      \   'component_function': {
+      \     'fugitive': 'LightlineFugitive',
+      \     'filename': 'LightlineFilename',
+      \     'fileformat': 'LightlineFileformat',
+      \     'filetype': 'LightlineFiletype',
+      \     'fileencoding': 'LightlineFileencoding',
+      \     'mode': 'LightlineMode',
+      \     'ctrlpmark': 'CtrlPMark',
+      \   },
+      \   'component_expand': {
+      \     'syntastic': 'SyntasticStatuslineFlag',
+      \   },
+      \   'component_type': {
+      \     'syntastic': 'error',
+      \   },
+      \ }
+
+      function! LightlineModified()
+          return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+      endfunction
+
+      function! LightlineReadonly()
+          return &ft !~? 'help' && &readonly ? 'RO' : ''
+      endfunction
+      
+      function! LightlineFilename()
+          let fname = expand('%:t')
+          let pathname = expand('%:h')
+          return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+                      \ fname == '__Tagbar__' ? g:lightline.fname :
+                      \ fname =~ '__Gundo\|NERD_tree' ? '' :
+                      \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+                      \ &ft == 'unite' ? unite#get_status_string() :
+                      \ &ft == 'vimshell' ? vimshell#get_status_string() :
+                      \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+                      \ ('' != fname ? pathname . '/' . fname : '[No Name]') .
+                      \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+      endfunction
+
+      function! LightlineFugitive()
+          try
+              if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+                  let mark = ''  " edit here for cool mark
+                  let branch = fugitive#head()
+                  return branch !=# '' ? mark.branch : ''
+              endif
+          catch
+          endtry
+          return ''
+      endfunction
+
+      function! LightlineFileformat()
+          return winwidth(0) > 70 ? &fileformat : ''
+      endfunction
+
+      function! LightlineFiletype()
+          return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+      endfunction
+
+      function! LightlineFileencoding()
+          return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+      endfunction
+
+      function! LightlineMode()
+          let fname = expand('%:t')
+          return fname == '__Tagbar__' ? 'Tagbar' :
+                      \ fname == 'ControlP' ? 'CtrlP' :
+                      \ fname == '__Gundo__' ? 'Gundo' :
+                      \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+                      \ fname =~ 'NERD_tree' ? 'NERDTree' :
+                      \ &ft == 'unite' ? 'Unite' :
+                      \ &ft == 'vimfiler' ? 'VimFiler' :
+                      \ &ft == 'vimshell' ? 'VimShell' :
+                      \ winwidth(0) > 60 ? lightline#mode() : ''
+      endfunction
+
+      function! CtrlPMark()
+          if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+              call lightline#link('iR'[g:lightline.ctrlp_regex])
+              return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+                          \ , g:lightline.ctrlp_next], 0)
+          else
+              return ''
+          endif
+      endfunction
+
+      let g:ctrlp_status_func = {
+                  \ 'main': 'CtrlPStatusFunc_1',
+                  \ 'prog': 'CtrlPStatusFunc_2',
+                  \ }
+
+      function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+          let g:lightline.ctrlp_regex = a:regex
+          let g:lightline.ctrlp_prev = a:prev
+          let g:lightline.ctrlp_item = a:item
+          let g:lightline.ctrlp_next = a:next
+          return lightline#statusline(0)
+      endfunction
+
+      function! CtrlPStatusFunc_2(str)
+          return lightline#statusline(0)
+      endfunction
+
+      augroup AutoSyntastic
+          autocmd!
+          autocmd BufWritePost * call s:syntastic()
+      augroup END
+      function! s:syntastic()
+          SyntasticCheck
+          call lightline#update()
+      endfunction
+    " }
 " }
 
 " Strip whitespace {
@@ -266,33 +387,6 @@ nnoremap Y y$"
 " GUI
 :set gfn=Bitstream\ Vera\ Sans\ Mono\ 8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"au BufNewFile,BufRead *.less set filetype=less
-"au BufRead,BufNewFile *.twig setfiletype htmldjango
-"au BufRead,BufNewFile *.json setfiletype javascript
 
 " TAILLE DE LA TABULATION 
 :set textwidth=0
@@ -397,42 +491,18 @@ endfunc
 :nnoremap <C-h> gT
 
 
+:cab t tabe
+
 :imap <C-h> <Left>
 :imap <C-l> <Right>
 :imap <M-h> <Esc>
-
-
-
-" RENVOI UNE COMMANDE TABULATION OU AUTO-COMPLETION EN FONCTION DES CARACTERES PRECEDENTS  
-"func! Taborcomplete()
-"    let col = col('.')-1
-"    if !col || getline('.')[col-1] !~ '\k'
-"        return "\<tab>"
-"    else
-"        return "\<C-N>"
-"    endif
-"endfunc
-
-" bind sur tab de la fonction.
-" inoremap <Tab> <C-R>=Taborcomplete()<CR>
-
-
-
 
 "pour eviter les tab incrementés lors des copiers collers
 " :set paste
 :set laststatus=2
 
-
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
-
-
-
-
-"Raccourci
-vmap ,f :<C-U>!firefox "http://fr.php.net/<cword>" >& /dev/null<CR><CR>
-vmap ,p :<C-U>!opera "http://www.php.net/manual-lookup.php?pattern=<cword>&scope=quickref" >& /dev/null<CR><CR>
 
 "fonctionnement de la touche Home
 :noremap <Home> ^
@@ -469,7 +539,9 @@ map <C-]> <C-w><C-]>
 
 
 "positionnement de la fenetre en full screen a droite
-:winpos 0 0
+if !has('nvim')
+    :winpos 0 0
+endif
 ":set lines=106
 ":set columns=148
 
@@ -500,6 +572,3 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
-
-
-:source ~/.vim/.sources/.abbrevations.vimrc
