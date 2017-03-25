@@ -39,6 +39,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
+    Plugin 'flowtype/vim-flow'
 
     "Plugin 'spf13/vim-autoclose'
     Plugin 'airblade/vim-gitgutter'
@@ -50,7 +51,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'kien/ctrlp.vim'
 
     " status line
-     Plugin 'itchyny/lightline.vim'
+    Plugin 'itchyny/lightline.vim'
+
+    " Theme
+    Plugin 'mhartington/oceanic-next'
 
 
     if executable('ack-grep')
@@ -114,11 +118,12 @@ endif
 " if $COLORTERM == 'gnome-terminal'
 set t_Co=256
 " endif
-if (has("termguicolors"))
+if (has("nvim") && has("termguicolors"))
     set termguicolors
 endif
 
-colorscheme jdeniau
+" colorscheme jdeniau
+colorscheme OceanicNext
 " colorscheme lucius
 " LuciusBlack
 
