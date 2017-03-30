@@ -40,6 +40,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
     Plugin 'flowtype/vim-flow'
+    Plugin 'fleischie/vim-styled-components'
 
     "Plugin 'spf13/vim-autoclose'
     Plugin 'airblade/vim-gitgutter'
