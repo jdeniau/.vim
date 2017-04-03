@@ -551,6 +551,11 @@ endif
 ":set lines=106
 ":set columns=148
 
+" user ag instead of ack if available
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+
 " define a highlight colour group for bookmarks
 let g:showmarks_enable = 0
 let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
