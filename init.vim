@@ -36,6 +36,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'elzr/vim-json'
     Plugin 'groenewege/vim-less'
     Plugin 'pangloss/vim-javascript'
+    Plugin 'mxw/vim-jsx'
     Plugin 'hail2u/vim-css3-syntax'
     Plugin 'beyondwords/vim-twig'
     Plugin 'digitaltoad/vim-jade'
@@ -56,6 +57,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
     " Theme
     Plugin 'mhartington/oceanic-next'
+
+    " Formatting
+    Plugin 'sbdchd/neoformat'
 
 
     if executable('ack-grep')
@@ -583,3 +587,20 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_aggregate_errors = 1
 
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
+
+" Syntax formatter
+" autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
+" let g:neoformat_try_formatprg = 1
+" autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin
+" autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
+
+let g:neoformat_javascript_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--stdin', '--single-quote', '--trailing-comma es5'],
+            \ 'stdin': 1,
+            \ 'no_append': 1,
+            \ }
+
+let g:neoformat_enabled_javascript = ['prettier']
