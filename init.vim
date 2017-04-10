@@ -16,7 +16,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
     Plugin 'tomtom/tlib_vim'
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'mbbill/undotree'
-    Plugin 'scrooloose/syntastic'
+    Plugin 'vim-syntastic/syntastic'
 
     " Snippets
     Plugin 'SirVer/ultisnips'
@@ -570,12 +570,14 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 " Syntastic checkers
-let g:syntastic_php_checkers = ['php7.0', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 let g:syntastic_php_phpmd_exec = './vendor/phpmd/phpmd/src/bin/phpmd'
 let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode,controversial'
 let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_flow_exec = './node_modules/.bin/flow'
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_aggregate_errors = 1
+let g:flow#enable = 0
 
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
 
