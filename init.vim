@@ -190,6 +190,7 @@ set foldcolumn=1
     autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
+    autocmd BufNewFile,BufRead *.svg.twig set filetype=svg.twig
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
     " preceding line best in a plugin but here for now.
 
@@ -473,30 +474,13 @@ endfunc
 
 nmap <silent> ,f <Esc>:call ToggleLeftColumns()<CR>
 
-func! ShiftTab(direction)
-     let tab_number = tabpagenr()
-     if a:direction == 0
-         if tab_number == 1
-             exe 'tabm' . tabpagenr('$')
-         else
-             exe 'tabm' . (tab_number - 2)
-         endif
-     else
-         if tab_number == tabpagenr('$')
-             exe 'tabm ' . 0
-         else
-             exe 'tabm ' . tab_number
-         endif
-     endif
-     return ''
-endfunc
+" move tabs
+:nnoremap <C-A-h>  :tabm -1<CR>
+:nnoremap <C-A-l> :tabm +1<CR>
+:nnoremap <C-k>  :tabm -1<CR>
+:nnoremap <C-j> :tabm +1<CR>
 
-" inoremap <silent> <C-S-h>  <C-r>=ShiftTab(0)<CR>
-" inoremap <silent> <C-S-l>  <C-r>=ShiftTab(1)<CR>
-
-:nnoremap <silent> <A-h>  :call ShiftTab(0)<CR>
-:nnoremap <silent> <A-l> :call ShiftTab(1)<CR>
-
+" move between tabs
 :nnoremap <C-l> gt
 :nnoremap <C-h> gT
 
