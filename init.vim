@@ -196,6 +196,9 @@ set foldcolumn=1
 
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
 
+    " php-cs-fixer filetype
+    autocmd BufNewFile,BufRead *.php_cs set filetype=php
+
     " Workaround vim-commentary for Haskell
     autocmd FileType haskell setlocal commentstring=--\ %s
     " Workaround broken colour highlighting in Haskell
