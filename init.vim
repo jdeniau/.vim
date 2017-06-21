@@ -192,6 +192,8 @@ set foldcolumn=1
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd BufNewFile,BufRead *.svg.twig set filetype=svg.twig
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType php autocmd BufWritePre <buffer> call PhpSortUse()
+    " let g:php_namespace_sort_after_insert = 1
     " preceding line best in a plugin but here for now.
 
     autocmd BufNewFile,BufRead *.coffee set filetype=coffee
@@ -465,11 +467,13 @@ func! ToggleLeftColumns()
     if &number
         set nonumber
         set foldcolumn=0
+        SyntasticReset
         GitGutterDisable
         exe "echo 'Left columns OFF'"
     else
         set number
         set foldcolumn=1
+        SyntasticCheck
         GitGutterEnable
         exe "echo 'Left columns ON'"
     endif
@@ -590,4 +594,11 @@ let g:neoformat_javascript_prettier = {
             \ 'no_append': 1,
             \ }
 
+" let g:neoformat_javascript_prettiereslint = {
+"             \ 'exe': 'prettier-eslint',
+"             \ 'args': ['--stdin', '--single-quote', '--trailing-comma es5'],
+"             \ 'stdin': 1,
+"             \ }
+
+" let g:neoformat_enabled_javascript = ['prettiereslint']
 let g:neoformat_enabled_javascript = ['prettier']
