@@ -131,6 +131,7 @@ endif
 colorscheme OceanicNext
 " colorscheme lucius
 " LuciusBlack
+set colorcolumn=80,120
 
 set showmode
 set cursorline
@@ -200,6 +201,7 @@ set foldcolumn=1
 
     " php-cs-fixer filetype
     autocmd BufNewFile,BufRead *.php_cs set filetype=php
+    let g:php_cs_fixer_config_file = '.php_cs'
 
     " Workaround vim-commentary for Haskell
     autocmd FileType haskell setlocal commentstring=--\ %s
@@ -208,7 +210,8 @@ set foldcolumn=1
 
     " Javascript airbnb convention
     autocmd BufRead,BufEnter .babelrc,.eslintrc set filetype=javascript
-    autocmd FileType javascript  setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
+    autocmd FileType scss setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
 
     " jsx file not required to do JSX
     let g:jsx_ext_required = 0
@@ -596,6 +599,13 @@ let g:neoformat_javascript_prettier = {
             \ 'no_append': 1,
             \ }
 
+let g:neoformat_json_prettier = {
+            \ 'exe': 'prettier',
+            \ 'args': ['--stdin'],
+            \ 'stdin': 1,
+            \ 'no_append': 1,
+            \ }
+
 " let g:neoformat_javascript_prettiereslint = {
 "             \ 'exe': 'prettier-eslint',
 "             \ 'args': ['--stdin', '--single-quote', '--trailing-comma es5'],
@@ -604,3 +614,4 @@ let g:neoformat_javascript_prettier = {
 
 " let g:neoformat_enabled_javascript = ['prettiereslint']
 let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_json = ['prettier']
