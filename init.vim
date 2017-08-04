@@ -11,6 +11,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
     " My bundles
     Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-obsession'
 
     Plugin 'vim-scripts/taglist.vim'
     Plugin 'tomtom/tlib_vim'
