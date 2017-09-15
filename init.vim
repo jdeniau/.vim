@@ -190,7 +190,6 @@ set foldcolumn=1
     " .vimrc.before.local file:
     "   let g:spf13_keep_trailing_whitespace = 1
     autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd BufNewFile,BufRead *.svg.twig set filetype=svg.twig
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
@@ -586,33 +585,15 @@ let g:flow#enable = 0
 let g:syntastic_php_phpcs_args = "--standard=PSR2"
 
 " Syntax formatter
-" autocmd FileType javascript set formatprg=prettier\ --stdin\ --parser\ flow\ --single-quote\ --trailing-comma\ es5
-" let g:neoformat_try_formatprg = 1
-" autocmd FileType javascript.jsx,javascript setlocal formatprg=prettier\ --stdin
-" autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
-autocmd BufWritePre *.js Neoformat
-autocmd BufWritePre *.jsx Neoformat
 
-let g:neoformat_javascript_prettier = {
-            \ 'exe': 'prettier',
-            \ 'args': ['--stdin', '--single-quote', '--trailing-comma es5'],
-            \ 'stdin': 1,
-            \ 'no_append': 1,
-            \ }
 
-let g:neoformat_json_prettier = {
-            \ 'exe': 'prettier',
-            \ 'args': ['--stdin'],
-            \ 'stdin': 1,
-            \ 'no_append': 1,
-            \ }
-
-" let g:neoformat_javascript_prettiereslint = {
-"             \ 'exe': 'prettier-eslint',
-"             \ 'args': ['--stdin', '--single-quote', '--trailing-comma es5'],
-"             \ 'stdin': 1,
-"             \ }
-
-" let g:neoformat_enabled_javascript = ['prettiereslint']
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_json = ['prettier']
+let g:neoformat_enabled_python = ['autopep8']
+let g:neoformat_enabled_php = ['php-cs-fixer']
+
+" Group Neoformat and save in undo command
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
