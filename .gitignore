@@ -1,5 +1,6 @@
 tags
 .backups/*
 !.backups/.gitkeep
-bundle/*
+autoload/plug.vim
+plugged/*
 .netrwhist

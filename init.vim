@@ -1,78 +1,92 @@
 :set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
+if has('nvim') 
+    if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+        silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
+elseif empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 
 " let Vundle manage Vundle
 " required! 
 "if exists("*vundle#begin")
-    call vundle#begin()
-    Plugin 'VundleVim/Vundle.vim'
-
+if (has("nvim"))
+    call plug#begin('~/.local/share/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
     " My bundles
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-obsession'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-obsession'
 
-    Plugin 'vim-scripts/taglist.vim'
-    Plugin 'tomtom/tlib_vim'
-    Plugin 'MarcWeber/vim-addon-mw-utils'
-    Plugin 'mbbill/undotree'
-    Plugin 'vim-syntastic/syntastic'
+    Plug 'vim-scripts/taglist.vim'
+    Plug 'tomtom/tlib_vim'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'mbbill/undotree'
+    Plug 'vim-syntastic/syntastic'
 
     " Snippets
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
+    "if has('python') || has('python3')
+        Plug 'SirVer/ultisnips'
+    "endif
+
+    Plug 'honza/vim-snippets'
 
     " Diff
-    Plugin 'will133/vim-dirdiff'
+    Plug 'will133/vim-dirdiff'
 
     " PHP
-    Plugin 'spf13/PIV'
-    "Plugin 'vexxor/phpdoc.vim'
-    Plugin 'arnaud-lb/vim-php-namespace'
-    Plugin 'vim-coffee-script'
-    Plugin 'joonty/vdebug'
+    Plug 'spf13/PIV'
+    "Plug 'vexxor/phpdoc.vim'
+    Plug 'arnaud-lb/vim-php-namespace'
+    Plug 'joonty/vdebug'
 
     " HTML5
-    Plugin 'elzr/vim-json'
-    Plugin 'groenewege/vim-less'
-    Plugin 'pangloss/vim-javascript'
-    Plugin 'mxw/vim-jsx'
-    Plugin 'hail2u/vim-css3-syntax'
-    Plugin 'beyondwords/vim-twig'
-    Plugin 'digitaltoad/vim-jade'
-    Plugin 'flowtype/vim-flow'
-    Plugin 'fleischie/vim-styled-components'
+    Plug 'elzr/vim-json'
+    Plug 'groenewege/vim-less'
+    Plug 'pangloss/vim-javascript'
+    Plug 'mxw/vim-jsx'
+    Plug 'hail2u/vim-css3-syntax'
+    Plug 'beyondwords/vim-twig'
+    Plug 'digitaltoad/vim-jade'
+    Plug 'flowtype/vim-flow'
+    " Plug 'fleischie/vim-styled-components'
 
-    "Plugin 'spf13/vim-autoclose'
-    Plugin 'airblade/vim-gitgutter'
-    Plugin 'spf13/vim-colors'
+    "Plug 'spf13/vim-autoclose'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'spf13/vim-colors'
 
-    Plugin 'shawncplus/phpcomplete.vim'
-    Plugin 'stephpy/vim-php-cs-fixer'
+    Plug 'shawncplus/phpcomplete.vim'
+    Plug 'stephpy/vim-php-cs-fixer'
 
-    Plugin 'kien/ctrlp.vim'
+    Plug 'kien/ctrlp.vim'
 
     " status line
-    Plugin 'itchyny/lightline.vim'
+    Plug 'itchyny/lightline.vim'
 
     " Theme
-    Plugin 'mhartington/oceanic-next'
+    Plug 'mhartington/oceanic-next'
 
     " Formatting
-    Plugin 'sbdchd/neoformat'
+    Plug 'sbdchd/neoformat'
 
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-        Plugin 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
     elseif executable('ack')
-        Plugin 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
     elseif executable('ag')
-        Plugin 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
         let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     endif
-    call vundle#end()
+    call plug#end()
 "else
 "    echo 'begin exists no'
 "endif
@@ -90,9 +104,6 @@ let mapleader=","
 
 
 " General
-filetype plugin indent on
-syntax on
-
 if has ('x') && has ('gui') " On Linux use + register for copy-paste
     set clipboard=unnamedplus
 elseif has ('gui')          " On mac and Windows, use * register for copy-paste
