@@ -13,9 +13,6 @@ elseif empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 
-" let Vundle manage Vundle
-" required! 
-"if exists("*vundle#begin")
 if (has("nvim"))
     call plug#begin('~/.local/share/nvim/plugged')
 else
@@ -29,7 +26,7 @@ endif
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'mbbill/undotree'
-    Plug 'vim-syntastic/syntastic'
+    Plug 'w0rp/ale'
 
     " Snippets
     "if has('python') || has('python3')
@@ -55,27 +52,23 @@ endif
     Plug 'hail2u/vim-css3-syntax'
     Plug 'beyondwords/vim-twig'
     Plug 'digitaltoad/vim-jade'
-    Plug 'flowtype/vim-flow'
-    " Plug 'fleischie/vim-styled-components'
+"     Plug 'flowtype/vim-flow' " Does not seems to play well with ale, but maybe useless
+    " Plug 'fleischie/vim-styled-components' " too much memory consumtion
 
     "Plug 'spf13/vim-autoclose'
     Plug 'airblade/vim-gitgutter'
     Plug 'spf13/vim-colors'
 
     Plug 'shawncplus/phpcomplete.vim'
-    Plug 'stephpy/vim-php-cs-fixer'
 
     Plug 'kien/ctrlp.vim'
 
     " status line
     Plug 'itchyny/lightline.vim'
+    Plug 'maximbaz/lightline-ale'
 
     " Theme
     Plug 'mhartington/oceanic-next'
-
-    " Formatting
-    Plug 'sbdchd/neoformat'
-
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -86,10 +79,9 @@ endif
         Plug 'mileszs/ack.vim'
         let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
     endif
-    call plug#end()
-"else
-"    echo 'begin exists no'
-"endif
+call plug#end()
+
+
 
 "php Doc
 inoremap <F6> <ESC>:call PhpDoc()<CR>i
@@ -101,7 +93,6 @@ imap <F1> <Esc>
 
 
 let mapleader=","
-
 
 " General
 if has ('x') && has ('gui') " On Linux use + register for copy-paste
@@ -280,11 +271,33 @@ nnoremap Y y$"
         let g:vim_json_syntax_conceal = 0
     " }
     " lightline {
+      " let g:lightline = {
+      " \   'colorscheme': 'powerline',
+      " \   'active': {
+      " \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+      " \     'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      " \   },
+      " \   'component_function': {
+      " \     'fugitive': 'LightlineFugitive',
+      " \     'filename': 'LightlineFilename',
+      " \     'fileformat': 'LightlineFileformat',
+      " \     'filetype': 'LightlineFiletype',
+      " \     'fileencoding': 'LightlineFileencoding',
+      " \     'mode': 'LightlineMode',
+      " \     'ctrlpmark': 'CtrlPMark',
+      " \   },
+      " \   'component_expand': {
+      " \     'syntastic': 'SyntasticStatuslineFlag',
+      " \   },
+      " \   'component_type': {
+      " \     'syntastic': 'error',
+      " \   },
+      " \ }
       let g:lightline = {
       \   'colorscheme': 'powerline',
       \   'active': {
       \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-      \     'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \     'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \   },
       \   'component_function': {
       \     'fugitive': 'LightlineFugitive',
@@ -296,10 +309,16 @@ nnoremap Y y$"
       \     'ctrlpmark': 'CtrlPMark',
       \   },
       \   'component_expand': {
-      \     'syntastic': 'SyntasticStatuslineFlag',
+      \     'linter_checking': 'lightline#ale#checking',
+      \     'linter_warnings': 'lightline#ale#warnings',
+      \     'linter_errors': 'lightline#ale#errors',
+      \     'linter_ok': 'lightline#ale#ok',
       \   },
       \   'component_type': {
-      \     'syntastic': 'error',
+      \     'linter_checking': 'warning',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
       \   },
       \ }
 
@@ -389,14 +408,14 @@ nnoremap Y y$"
           return lightline#statusline(0)
       endfunction
 
-      augroup AutoSyntastic
-          autocmd!
-          autocmd BufWritePost * call s:syntastic()
-      augroup END
-      function! s:syntastic()
-          SyntasticCheck
-          call lightline#update()
-      endfunction
+      " augroup AutoSyntastic
+      "     autocmd!
+      "     autocmd BufWritePost * call s:syntastic()
+      " augroup END
+      " function! s:syntastic()
+      "     SyntasticCheck
+      "     call lightline#update()
+      " endfunction
     " }
 " }
 
@@ -481,13 +500,13 @@ func! ToggleLeftColumns()
     if &number
         set nonumber
         set foldcolumn=0
-        SyntasticReset
+        " SyntasticReset
         GitGutterDisable
         exe "echo 'Left columns OFF'"
     else
         set number
         set foldcolumn=1
-        SyntasticCheck
+        " SyntasticCheck
         GitGutterEnable
         exe "echo 'Left columns ON'"
     endif
@@ -584,27 +603,55 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 ""map <buffer> <F5> :call PhpInsertUse()<CR>
 
 " Syntastic checkers
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
-let g:syntastic_php_phpmd_exec = './vendor/phpmd/phpmd/src/bin/phpmd'
-let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode,controversial'
-let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
-let g:syntastic_javascript_flow_exec = './node_modules/.bin/flow'
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_aggregate_errors = 1
-let g:flow#enable = 0
-
-let g:syntastic_php_phpcs_args = "--standard=PSR2"
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+" let g:syntastic_php_phpmd_exec = './vendor/phpmd/phpmd/src/bin/phpmd'
+" let g:syntastic_php_phpmd_post_args = 'codesize,design,unusedcode,controversial'
+" let g:syntastic_javascript_eslint_exec = './node_modules/.bin/eslint'
+" let g:syntastic_javascript_flow_exec = './node_modules/.bin/flow'
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+" let g:syntastic_aggregate_errors = 1
+" let g:flow#enable = 0
+" 
+" let g:syntastic_php_phpcs_args = "--standard=PSR2"
 
 " Syntax formatter
 
 
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_enabled_json = ['prettier']
-let g:neoformat_enabled_python = ['autopep8']
-let g:neoformat_enabled_php = ['php-cs-fixer']
+" let g:neoformat_enabled_javascript = ['prettier']
+" let g:neoformat_enabled_json = ['prettier']
+" let g:neoformat_enabled_python = ['autopep8']
+" let g:neoformat_enabled_php = ['php-cs-fixer']
 
 " Group Neoformat and save in undo command
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
+"
+"
+
+" let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
+let g:ale_open_list = 0
+let g:ale_fixers = {
+\   'javascript': [ 'prettier' ],
+\   'php': [ 'php_cs_fixer' ],
+\}
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow'],
+\}
+
+let g:ale_php_phpcbf_standard = 'PSR2'
+let g:ale_php_phpcs_standard = 'PSR2'
+let g:ale_php_phpmd_ruleset = 'codesize,controversial,design,unusedcode'
+
+
+" Autowrite file with php-cs-fixer as it's not managed by ale
+"autocmd FileType php autocmd BufWritePost * call PhpCsFixerFixFile()
+" autocmd FileType php autocmd BufWritePost,FileWritePost * :echom "writing file"
+" augroup phpcsfixer
+"     autocmd!
+"     autocmd FileType php autocmd BufWritePost,FileWritePost * :call PhpCsFixerFixFile()
+" augroup END
