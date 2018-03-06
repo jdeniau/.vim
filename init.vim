@@ -69,6 +69,9 @@ endif
 
     " Theme
     Plug 'mhartington/oceanic-next'
+    Plug 'dracula/vim', { 'as': 'dracula' }
+    " Plug 'markvincze/panda-vim'
+    Plug 'jdeniau/panda-vim'
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -131,7 +134,7 @@ if (has("nvim") && has("termguicolors"))
 endif
 
 " colorscheme jdeniau
-colorscheme OceanicNext
+colorscheme dracula
 " colorscheme lucius
 " LuciusBlack
 set colorcolumn=80,120
