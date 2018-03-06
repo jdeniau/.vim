@@ -39,6 +39,7 @@ endif
     Plug 'will133/vim-dirdiff'
 
     " PHP
+    Plug 'StanAngeloff/php.vim'
     Plug 'spf13/PIV'
     "Plug 'vexxor/phpdoc.vim'
     Plug 'arnaud-lb/vim-php-namespace'
@@ -57,7 +58,6 @@ endif
 
     "Plug 'spf13/vim-autoclose'
     Plug 'airblade/vim-gitgutter'
-    Plug 'spf13/vim-colors'
 
     Plug 'shawncplus/phpcomplete.vim'
 
@@ -67,11 +67,14 @@ endif
     Plug 'itchyny/lightline.vim'
     Plug 'maximbaz/lightline-ale'
 
-    " Theme
+    " Themes
+    Plug 'spf13/vim-colors'
     Plug 'mhartington/oceanic-next'
     Plug 'dracula/vim', { 'as': 'dracula' }
     " Plug 'markvincze/panda-vim'
     Plug 'jdeniau/panda-vim'
+    " Plug 'trusktr/seti.vim'
+    Plug 'nicholasc/vim-seti'
 
     if executable('ack-grep')
         let g:ackprg="ack-grep -H --nocolor --nogroup --column"
