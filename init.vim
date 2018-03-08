@@ -40,7 +40,7 @@ endif
 
     " PHP
     Plug 'StanAngeloff/php.vim'
-    Plug 'spf13/PIV'
+    " Plug 'spf13/PIV'
     "Plug 'vexxor/phpdoc.vim'
     Plug 'arnaud-lb/vim-php-namespace'
     Plug 'joonty/vdebug'
@@ -59,9 +59,12 @@ endif
     "Plug 'spf13/vim-autoclose'
     Plug 'airblade/vim-gitgutter'
 
-    Plug 'shawncplus/phpcomplete.vim'
+    " Plug 'shawncplus/phpcomplete.vim'
 
     Plug 'kien/ctrlp.vim'
+
+    " Behat
+    Plug 'veloce/vim-behat'
 
     " status line
     Plug 'itchyny/lightline.vim'
@@ -71,8 +74,7 @@ endif
     Plug 'spf13/vim-colors'
     Plug 'mhartington/oceanic-next'
     Plug 'dracula/vim', { 'as': 'dracula' }
-    " Plug 'markvincze/panda-vim'
-    Plug 'jdeniau/panda-vim'
+    Plug 'markvincze/panda-vim'
     " Plug 'trusktr/seti.vim'
     Plug 'nicholasc/vim-seti'
 
@@ -251,11 +253,11 @@ nnoremap Y y$"
 :cmap wro %!sudo tee > /dev/null %
 
 " Plugins {
-    " PIV {
-        let g:DisableAutoPHPFolding = 1
-        let g:PIVAutoClose = 0
+    " " PIV {
+    "     let g:DisableAutoPHPFolding = 1
+    "     let g:PIVAutoClose = 0
 
-    " }
+    " " }
     " SnipMate {
         " Setting the author val
         " If forking, please overwrite in your .vimrc.local file
@@ -452,9 +454,10 @@ nnoremap Y y$"
 " RETOUR A LA LIGNE AUTOMATIQUE 
 " :set nowrap
 
-" OPTIONS SPECIFIQUES AU PHP
-":let php_mysql_query=1
-":let php_folding=1
+" PHP syntax configuration
+"let php_mysql_query=1
+let php_sync_method = 0 " avoid breaking syntax detection for long files
+let php_folding = 0 " don't fold
 
 " APPLICATION APPELEE PAR LA COMMANDE :MAKE
 ":set makeprg=php\ -l\ %
