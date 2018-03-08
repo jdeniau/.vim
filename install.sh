@@ -12,6 +12,5 @@ mkdir -p ~/.config/nvim/
 ln -s ~/.vim/init.vim ~/.config/nvim/init.vim
 
 cd ~/.vim
-git submodule update --init bundle/Vundle.vim
-vim +PluginInstall +qall
+vim +PlugInstall +qall
 cd -
