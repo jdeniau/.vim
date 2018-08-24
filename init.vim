@@ -202,6 +202,7 @@ set foldcolumn=1
     autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> if !exists('g:spf13_keep_trailing_whitespace') | call StripTrailingWhitespace() | endif
     autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
     autocmd BufNewFile,BufRead *.svg.twig set filetype=svg.twig
+    autocmd BufNewFile,BufRead *.neon,.yamllint set filetype=yaml
     autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
     autocmd FileType php autocmd BufWritePre <buffer> call PhpSortUse()
     " let g:php_namespace_sort_after_insert = 1
@@ -640,12 +641,17 @@ highlight ShowMarksHLm gui=bold guibg=grey30
 "
 
 " let g:ale_lint_on_enter = 1
+let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
 let g:ale_open_list = 0
 let g:ale_fixers = {
+\   'css': [ 'prettier' ],
+\   'json': [ 'prettier' ],
+\   'markdown': [ 'prettier' ],
 \   'javascript': [ 'prettier' ],
+\   'yaml': [ 'prettier' ],
 \   'php': [ 'php_cs_fixer' ],
 \}
 let g:ale_linters = {
