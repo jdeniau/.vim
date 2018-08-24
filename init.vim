@@ -74,6 +74,7 @@ endif
     Plug 'spf13/vim-colors'
     Plug 'mhartington/oceanic-next'
     Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'chriskempson/base16-vim'
     Plug 'markvincze/panda-vim'
     " Plug 'trusktr/seti.vim'
     Plug 'nicholasc/vim-seti'
@@ -138,10 +139,9 @@ if (has("nvim") && has("termguicolors"))
     set termguicolors
 endif
 
-" colorscheme jdeniau
-colorscheme dracula
-" colorscheme lucius
-" LuciusBlack
+" colorscheme dracula
+" colorscheme base16-one-light
+colorscheme base16-unikitty-light
 set colorcolumn=80,120
 
 set showmode
@@ -303,7 +303,7 @@ nnoremap Y y$"
       " \   },
       " \ }
       let g:lightline = {
-      \   'colorscheme': 'powerline',
+      \   'colorscheme': 'Tomorrow',
       \   'active': {
       \     'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
       \     'right': [ [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
