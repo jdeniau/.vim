@@ -134,6 +134,13 @@ endif
 " UI
 " if $COLORTERM == 'gnome-terminal'
 set t_Co=256
+if (!has('nvim') && has("termguicolors") && &term =~ '256color')
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+  set termguicolors
+endif
 " endif
 if (has("nvim") && has("termguicolors"))
     set termguicolors
