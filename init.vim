@@ -37,6 +37,8 @@ endif
 
     " Diff
     Plug 'will133/vim-dirdiff'
+    " Force dir diff lang to en_US
+    let g:DirDiffForceLang = "en_US"
 
     " PHP
     Plug 'StanAngeloff/php.vim'
@@ -230,6 +232,7 @@ set foldcolumn=1
     autocmd BufRead,BufEnter .babelrc,.eslintrc set filetype=javascript
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
     autocmd FileType scss setlocal shiftwidth=2 tabstop=2 softtabstop=2 foldcolumn=0
+    autocmd FileType yaml setlocal expandtab shiftwidth=2 softtabstop=2
 
     " jsx file not required to do JSX
     let g:jsx_ext_required = 0
@@ -449,6 +452,10 @@ nnoremap Y y$"
         endfunction
 " }
 
+" close tab on left / right {
+    command! -nargs=0 TabCloseRight :.+1,$tabdo :tabclose
+" }
+
 " GUI
 :set gfn=Bitstream\ Vera\ Sans\ Mono\ 8
 
@@ -658,7 +665,6 @@ let g:ale_fixers = {
 \   'json': [ 'prettier' ],
 \   'markdown': [ 'prettier' ],
 \   'javascript': [ 'prettier' ],
-\   'yaml': [ 'prettier' ],
 \   'php': [ 'php_cs_fixer' ],
 \}
 let g:ale_linters = {
