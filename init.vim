@@ -155,7 +155,7 @@ endif
 
 " colorscheme dracula
 " colorscheme base16-one-light
-colorscheme base16-unikitty-light
+colorscheme base16-unikitty-dark
 set colorcolumn=80,120
 
 set showmode
