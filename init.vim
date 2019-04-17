@@ -26,7 +26,7 @@ endif
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'mbbill/undotree'
-    Plug 'w0rp/ale'
+    Plug 'jdeniau/ale', { 'branch': 'phpstan-improve-defaults' }
 
     " Snippets
     "if has('python') || has('python3')
