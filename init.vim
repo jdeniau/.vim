@@ -26,7 +26,7 @@ endif
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'mbbill/undotree'
-    Plug 'jdeniau/ale', { 'branch': 'phpstan-improve-defaults' }
+    Plug 'w0rp/ale'
 
     " Snippets
     "if has('python') || has('python3')
@@ -52,6 +52,7 @@ endif
     Plug 'groenewege/vim-less'
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
+    Plug 'HerringtonDarkholme/yats'
     Plug 'hail2u/vim-css3-syntax'
     Plug 'beyondwords/vim-twig'
     Plug 'digitaltoad/vim-jade'
@@ -63,7 +64,7 @@ endif
 
     " Plug 'shawncplus/phpcomplete.vim'
 
-    Plug 'kien/ctrlp.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
 
     " Behat
     Plug 'veloce/vim-behat'
@@ -552,6 +553,10 @@ nmap <silent> ,f <Esc>:call ToggleLeftColumns()<CR>
 " move between tabs
 :nnoremap <C-l> gt
 :nnoremap <C-h> gT
+
+" move to previous / next error
+:nnoremap <A-j> :ALENext -error -wrap<CR>
+:nnoremap <A-k> :ALEPrevious -error -wrap<CR>
 
 
 :cab t tabe
