@@ -26,7 +26,7 @@ endif
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'mbbill/undotree'
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
 
     " Snippets
     "if has('python') || has('python3')
@@ -678,13 +678,14 @@ let g:ale_fixers = {
 \   'php': [ 'php_cs_fixer' ],
 \}
 let g:ale_linters = {
-\   'javascript': ['eslint', 'flow'],
+\   'javascript': ['eslint'],
 \}
 
 let g:ale_php_phpcbf_standard = 'PSR2'
 let g:ale_php_phpcs_standard = 'PSR2'
 let g:ale_php_phpmd_ruleset = 'codesize,controversial,design,unusedcode'
-
+" let g:ale_php_phpstan_configuration = 'phpstan.neon'
+" let g:ale_php_phpstan_level = ''
 
 " Autowrite file with php-cs-fixer as it's not managed by ale
 "autocmd FileType php autocmd BufWritePost * call PhpCsFixerFixFile()
